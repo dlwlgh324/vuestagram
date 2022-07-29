@@ -1,21 +1,24 @@
 <template>
 <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
-      <span class="profile-name">ChanKim</span>
+      <div class="profile" :style="{background : `url(${postdata.userImage})`}"></div>
+      <span class="profile-name">{{postdata.name}}</span>
     </div>
-    <div class="post-body"></div>
+    <div class="post-body" :style="{background : `url(${postdata.postImage})`}"></div>
     <div class="post-content">
-      <p>43 Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
-      <p class="date">May 15</p>
+      <p>{{postdata.likes}}</p>
+      <p><strong>{{postdata.name}}</strong> {{postdata.content}}</p>
+      <p class="date">{{postdata.date}}</p>
     </div>
 </div>   
 </template>
 
 <script>
 export default {
-
+  name :'app',
+  props : {
+    postdata : Array,
+  },
 }
 </script>
 
