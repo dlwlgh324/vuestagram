@@ -1,4 +1,5 @@
-export default [{
+export default [
+  {
     name: "Kim Hyun",
     userImage: "https://placeimg.com/100/100/arch",
     postImage: "https://placeimg.com/640/480/arch",

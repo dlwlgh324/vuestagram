@@ -4,10 +4,11 @@
             <li>Cancel</li>
         </ul>
         <ul class="header-button-right">
-            <li>Next</li>
+            <li v-if="step==1" @click="step++">Next</li>
+            <li v-if="step==2" @click="publish">upload</li>
         </ul>
     </div>
-    <Thecontainer :postdata="postdata" :step="step" />
+    <Thecontainer :postdata="postdata" :step="step" :img="img" @write="myData = $event"/>
     
     <button @click="more">더보기</button>
     
@@ -18,12 +19,12 @@
         </ul>
     </div>
     <!-- <div v-if="step == 0">내용0</div>
-        <div v-if="step == 1">내용1</div>
-        <div v-if="step == 2">내용2</div>
-        <button @click="step =0">버튼0</button>
-        <button @click="step =1">버튼1</button>
-        <button @click="step =2">버튼2</button>
-        <div style="margin-top:500px;"></div> -->
+                <div v-if="step == 1">내용1</div>
+                <div v-if="step == 2">내용2</div>
+                <button @click="step =0">버튼0</button>
+                <button @click="step =1">버튼1</button>
+                <button @click="step =2">버튼2</button>
+                <div style="margin-top:500px;"></div> -->
 </template>
 
 <script>
@@ -42,6 +43,8 @@ export default {
             postdata: postdata,
             themore: 0,
             step: 0,
+            img: '',
+            myData : '',
         }
     },
     methods: {
@@ -59,7 +62,23 @@ export default {
             console.log(a)
             let url = URL.createObjectURL(a[0]);
             console.log(url);
-            this.step ++;
+            this.img = url;
+            this.step++;
+        },
+        // this.게시물에 내가 만든 데이터 밀어넣기
+        publish() {
+            var myData = {
+                name: "Kim Hyun",
+                userImage: "https://placeimg.com/100/100/arch",
+                postImage: this.img,
+                likes: 36,
+                date: "May 15",
+                liked: false,
+                content: this.myData,
+                filter: "perpetua"
+            };
+            this.postdata.unshift(myData);
+            this.step = 0;
         }
     },
 }
